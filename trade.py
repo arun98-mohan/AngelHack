@@ -3,15 +3,16 @@
 #Stocks file format - stock_id,ltp
 
 import csv
-
 wish_list={}
 
 def read_Share_values():
-#Reading the Share Values
+    #Reading the Share Values
     with open("share_values.csv","r") as f:
         print("Share Values")
-        values=csv.reader(f)
-        print("Share ID , LTP")
+        lis=[line.split() for line in f] #creating list of list
+        print("Share ID , Last Traded Price")
+        for i,x in enumerate(lis):
+            print("{1}".format(i,x))
         for i in f:
             print(i)
 
@@ -27,12 +28,10 @@ def add_Stock_to_wish_list(id,price):
 def buy_Stock(id,price):
     for key,value in wish_list:
         if(id==key and value<=price):
-            #code for buying the stock
-            #add to block for blockchain
-
             del wish_list[id]
             return 0
-        return 1
+        else:
+            return 1
 
 
 choice=input("Buy or Sell [Enter buy || sell] or see for Current Value ")
